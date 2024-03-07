@@ -4,15 +4,15 @@ import { Link, useParams } from "react-router-dom";
 
 export default function ViewEmployee() {
   const [employee, setEmployee] = useState({
-    firstName:"",
-    lastName:"",
-    department:"",
-    salary:"",
-    email:"",
-    gender:"",
-    contact:"",
-    country:"",
-    dob:"",
+    firstName: "",
+    lastName: "",
+    department: "",
+    salary: "",
+    email: "",
+    gender: "",
+    contact: "",
+    country: "",
+    dob: "",
   });
 
   const { id } = useParams();

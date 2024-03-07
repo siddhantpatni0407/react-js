@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddEmployee from "./employee/AddEmployee";
 import EditEmployee from "./employee/EditEmployee";
 import ViewEmployee from "./employee/ViewEmployee";
+import About from "./about/about";
+import Footer from "./footer/footer";
 
 function App() {
   return (
@@ -17,8 +19,10 @@ function App() {
           <Route exact path="/addEmployee" element={<AddEmployee />} />
           <Route exact path="/editEmployee/:id" element={<EditEmployee />} />
           <Route exact path="/viewEmployee/:id" element={<ViewEmployee />} />
+          <Route exact path="/about" element={<About />} />
         </Routes>
       </Router>
+      <Footer />
     </div>
   );
 }

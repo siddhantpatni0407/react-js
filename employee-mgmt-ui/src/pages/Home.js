@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [employees, setEmployees] = useState([]);
-
-  const { id } = useParams();
 
   useEffect(() => {
     loadEmployees();
@@ -24,6 +22,7 @@ export default function Home() {
     );
     loadEmployees();
   };
+
   return (
     <div className="container">
       <div className="py-4">
@@ -53,15 +52,16 @@ export default function Home() {
                 <td>{employee.email}</td>
                 <td>{employee.department}</td>
                 <td>{employee.gender}</td>
-                <td>{employee.contactNo}</td>
+                <td>{employee.contact}</td>
                 <td>{employee.country}</td>
                 <td>{employee.dob}</td>
                 <td>
-                  <Link 
-                  className="btn btn-primary mx-2"
-                  to={`/ViewEmployee/${employee.id}`}
+                  <Link
+                    className="btn btn-primary mx-2"
+                    to={`/viewEmployee/${employee.id}`}
                   >
-                    View</Link>
+                    View
+                  </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
                     to={`/editEmployee/${employee.id}`}

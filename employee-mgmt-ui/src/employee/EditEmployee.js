@@ -8,10 +8,17 @@ export default function EditEmployee() {
   const { id } = useParams();
 
   const [employee, setEmployee] = useState({
-    name: "",
-    username: "",
+    firstName: "",
+    lastName: "",
+    department: "",
+    salary: "",
     email: "",
+    gender: "",
+    contact: "",
+    country: "",
+    dob: "",
   });
+
   const {
     firstName,
     lastName,
@@ -172,7 +179,7 @@ export default function EditEmployee() {
               />
             </div>
             <button type="submit" className="btn btn-outline-primary">
-              Submit
+              Update
             </button>
             <Link className="btn btn-outline-danger mx-2" to="/">
               Cancel

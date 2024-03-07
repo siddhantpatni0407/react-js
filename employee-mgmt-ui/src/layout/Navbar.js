@@ -9,6 +9,9 @@ export default function Navbar() {
           <Link className="navbar-brand" to={"/"}>
             Employee Management System
           </Link>
+          <Link className="navbar-brand" to={"/about"}>
+            About
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
