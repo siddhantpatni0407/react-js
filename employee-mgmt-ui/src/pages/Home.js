@@ -17,10 +17,12 @@ export default function Home() {
   };
 
   const deleteEmployee = async (id) => {
-    await axios.delete(
-      `http://localhost:8080/api/v1/employee-mgmt-service/employee/${id}`
-    );
-    loadEmployees();
+    if (window.confirm("Are you sure you want to delete this employee?")) {
+      await axios.delete(
+        `http://localhost:8080/api/v1/employee-mgmt-service/employee/${id}`
+      );
+      loadEmployees();
+    }
   };
 
   return (
@@ -43,10 +45,8 @@ export default function Home() {
           </thead>
           <tbody>
             {employees.map((employee, index) => (
-              <tr>
-                <th scope="row" key={index}>
-                  {index + 1}
-                </th>
+              <tr key={index}>
+                <th scope="row">{index + 1}</th>
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
                 <td>{employee.email}</td>
