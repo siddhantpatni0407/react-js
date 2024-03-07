@@ -117,14 +117,18 @@ export default function AddEmployee() {
               <label htmlFor="gender" className="form-label">
                 Gender
               </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter your Gender"
+              <select
+                className="form-select"
+                aria-label="Select Gender"
                 name="gender"
                 value={gender}
                 onChange={(e) => onInputChange(e)}
-              />
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
             <div className="mb-3">
               <label htmlFor="contact" className="form-label">
