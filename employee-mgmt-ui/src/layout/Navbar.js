@@ -1,33 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Navbar.css'; // Import CSS file for styling
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to={"/"}>
-            Employee Management System
-          </Link>
-          <Link className="navbar-brand" to={"/about"}>
-            About
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <Link className="btn btn-outline-light" to="/addEmployee">
-            Add Employee
-          </Link>
-        </div>
-      </nav>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div className="container-fluid">
+      <div className="links-container">
+        <Link className="navbar-brand" to={"/"}>
+          Home
+        </Link>
+        <Link className="navbar-brand" to={"/about"}>
+          About
+        </Link>
+      </div>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <Link className="btn btn-outline-light" to="/addEmployee">
+        Add Employee
+      </Link>
+    </div>
+    </nav>
     </div>
   );
-}
+};
+
+export default Navbar;
