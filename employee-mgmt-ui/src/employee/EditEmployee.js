@@ -31,6 +31,21 @@ export default function EditEmployee() {
     dob,
   } = employee;
 
+  const [emailId, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
+  const handleInputChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+    setIsValidEmail(validateEmail(inputEmail));
+  };
+
+  const validateEmail = (inputEmail) => {
+    // Regular expression for validating email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(inputEmail);
+  };
+
   const onInputChange = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
   };
@@ -118,13 +133,18 @@ export default function EditEmployee() {
                 Email
               </label>
               <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter your Email address"
-                name="email"
-                value={email}
-                onChange={(e) => onInputChange(e)}
+                type="text"
+                className={`form-control ${!isValidEmail ? "is-invalid" : ""}`}
+                placeholder="Enter your Email Address"
+                name="emailId"
+                value={emailId}
+                onChange={handleInputChange}
               />
+              {!isValidEmail && (
+                <div className="invalid-feedback">
+                  Please Enter a Valid Email Address.
+                </div>
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="gender" className="form-label">
@@ -174,7 +194,7 @@ export default function EditEmployee() {
                 DOB
               </label>
               <input
-                type={"text"}
+                type={"date"}
                 className="form-control"
                 placeholder="Enter your Country"
                 name="dob"

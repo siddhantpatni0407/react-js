@@ -29,6 +29,21 @@ export default function AddEmployee() {
     dob,
   } = employee;
 
+  const [emailId, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
+  const handleInputChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+    setIsValidEmail(validateEmail(inputEmail));
+  };
+
+  const validateEmail = (inputEmail) => {
+    // Regular expression for validating email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(inputEmail);
+  };
+
   const onInputChange = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
   };
@@ -105,13 +120,18 @@ export default function AddEmployee() {
                 Email
               </label>
               <input
-                type={"text"}
-                className="form-control"
+                type="text"
+                className={`form-control ${!isValidEmail ? "is-invalid" : ""}`}
                 placeholder="Enter your Email Address"
-                name="email"
-                value={email}
-                onChange={(e) => onInputChange(e)}
+                name="emailId"
+                value={emailId}
+                onChange={handleInputChange}
               />
+              {!isValidEmail && (
+                <div className="invalid-feedback">
+                  Please Enter a Valid Email Address.
+                </div>
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="gender" className="form-label">
@@ -127,7 +147,7 @@ export default function AddEmployee() {
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                <option value="Other">Other</option>className
               </select>
             </div>
             <div className="mb-3">
@@ -161,7 +181,7 @@ export default function AddEmployee() {
                 DOB
               </label>
               <input
-                type={"text"}
+                type={"date"}
                 className="form-control"
                 placeholder="Enter your DOB"
                 name="dob"
