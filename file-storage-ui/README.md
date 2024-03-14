@@ -1,4 +1,4 @@
-# File Storage System
+# File Storage System - file-storage-ui
 
 File Storage System is a web application built with ReactJS for managing files. It allows users to upload, view, and delete files conveniently.
 
