@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +6,17 @@ import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'; // Import the ref
 
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString()); // Initial current time
+
+  useEffect(() => {
+    // Update current time every second
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    // Clean up interval on unmount
+    return () => clearInterval(intervalId);
+  }, []); // Run effect only once on component mount
 
   const handleThemeChange = () => {
     setIsDarkMode(!isDarkMode);
@@ -46,6 +57,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="d-flex align-items-center">
+            <p className={`me-2 ${isDarkMode ? 'text-light' : 'text-dark'}`}>{currentTime}</p> {/* Display current time */}
             <button className="btn btn-outline-primary me-2" onClick={handleRefresh}>
               <FontAwesomeIcon icon={faSyncAlt} /> {/* Refresh icon */}
             </button>
