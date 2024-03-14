@@ -4,6 +4,8 @@ import './Home.css'; // Import CSS file for additional styling
 
 export default function Home() {
   const [allFiles, setAllFiles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10); // Number of items per page
   const [deleteId, setDeleteId] = useState(null);
   const [error, setError] = useState(null);
 
@@ -37,6 +39,14 @@ export default function Home() {
     setDeleteId(id);
   };
 
+  // Calculate index of the first and last item on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentFiles = allFiles.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container">
       <h1 className="animated-header">All Files</h1>
@@ -46,34 +56,53 @@ export default function Home() {
           {error}
         </div>
       ) : (
-        <div className="table-responsive"> {/* Add responsiveness to the table */}
-          <table className="table table-hover">
-            <thead className="table-dark">
-              <tr>
-                <th scope="col">Sr No.</th> {/* Change column header to "Sr No." */}
-                <th scope="col">ID</th>
-                <th scope="col">File Name</th>
-                <th scope="col">File Type</th>
-                <th scope="col">File Size</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {allFiles.map((file, index) => (
-                <tr key={file.id} className={index % 2 === 0 ? 'table-primary' : 'table-secondary'}>
-                  <td>{index + 1}</td> {/* Display the Sr No. */}
-                  <td>{file.id}</td>
-                  <td>{file.fileName}</td>
-                  <td>{file.fileType}</td>
-                  <td>{file.fileSize}</td>
-                  <td>
-                    <a href={file.fileDownloadURL} target="_blank" rel="noreferrer" className="btn btn-primary">View</a>
-                    <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(file.id)}>Delete</button>
-                  </td>
+        <div>
+          <div className="table-responsive"> {/* Add responsiveness to the table */}
+            <table className="table table-hover">
+              <thead className="table-dark">
+                <tr>
+                  <th scope="col">Sr No.</th> {/* Change column header to "Sr No." */}
+                  <th scope="col">ID</th>
+                  <th scope="col">File Name</th>
+                  <th scope="col">File Type</th>
+                  <th scope="col">File Size</th>
+                  <th scope="col">Actions</th>
                 </tr>
+              </thead>
+              <tbody>
+                {currentFiles.map((file, index) => (
+                  <tr key={file.id} className={index % 2 === 0 ? 'table-primary' : 'table-secondary'}>
+                    <td>{indexOfFirstItem + index + 1}</td> {/* Display the Sr No. */}
+                    <td>{file.id}</td>
+                    <td>{file.fileName}</td>
+                    <td>{file.fileType}</td>
+                    <td>{file.fileSize}</td>
+                    <td>
+                      <a href={file.fileDownloadURL} target="_blank" rel="noreferrer" className="btn btn-primary">View</a>
+                      <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(file.id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <nav aria-label="Page navigation">
+            <ul className="pagination justify-content-center">
+              <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                <button className="page-link" onClick={() => paginate(currentPage - 1)}>&lt;</button>
+              </li>
+              {Array.from({ length: Math.ceil(allFiles.length / itemsPerPage) }, (_, index) => (
+                <li key={index + 1} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                  <button className="page-link" onClick={() => paginate(index + 1)}>{index + 1}</button>
+                </li>
               ))}
-            </tbody>
-          </table>
+              <li className={`page-item ${currentPage === Math.ceil(allFiles.length / itemsPerPage) ? 'disabled' : ''}`}>
+                <button className="page-link" onClick={() => paginate(currentPage + 1)}>&gt;</button>
+              </li>
+            </ul>
+          </nav>
         </div>
       )}
 
