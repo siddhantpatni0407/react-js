@@ -55,7 +55,7 @@ sequenceDiagram
     C->>B: GET /api/v1/file-storage-service/file
     B->>C: Sends list of files
     C->>U: Display files list
-
+```
 
 ## Backend Application: spring-boot-file-storage-service
 
