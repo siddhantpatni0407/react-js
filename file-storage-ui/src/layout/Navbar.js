@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'; // Import the refresh icon
 
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleThemeChange = () => {
     setIsDarkMode(!isDarkMode);
+  };
+
+  const handleRefresh = () => {
+    window.location.reload(); // Reload the page to refresh data
   };
 
   return (
@@ -40,6 +46,9 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="d-flex align-items-center">
+            <button className="btn btn-outline-primary me-2" onClick={handleRefresh}>
+              <FontAwesomeIcon icon={faSyncAlt} /> {/* Refresh icon */}
+            </button>
             <Form.Check
               type="switch"
               id="theme-switch"
