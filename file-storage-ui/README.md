@@ -5,6 +5,7 @@ File Storage System is a web application built with ReactJS for managing files. 
 ## Table of Contents
 
 - [Features](#features)
+- [Sequence Diagram](#sequence-diagram)
 - [Backend Application: spring-boot-file-storage-service](#backend-application-spring-boot-file-storage-service)
 - [Frontend Application: file-storage-ui](#frontend-application-file-storage-ui)
 - [Installation](#installation)
@@ -19,6 +20,42 @@ File Storage System is a web application built with ReactJS for managing files. 
 - **Upload File:** Users can upload files to the system.
 - **View File:** Users can view files stored in the system.
 - **Delete File:** Users can delete files from the system.
+
+## Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as ReactJS Client
+    participant B as Backend spring-boot-file-storage-service
+
+    U->>C: Access File Storage System
+    C->>U: Display Interface
+
+    Note over U,C: Upload File
+    U->>C: Chooses file to upload
+    C->>B: POST /api/v1/file-storage-service/file/upload
+    B->>C: Return upload status
+    C->>U: Display upload status
+
+    Note over U,C: View File
+    U->>C: Requests to view file
+    C->>B: GET /api/v1/file-storage-service/file/download?id={fileId}
+    B->>C: Sends file data
+    C->>U: Display file content
+
+    Note over U,C: Delete File
+    U->>C: Requests to delete file
+    C->>B: DELETE /api/v1/file-storage-service/file/delete/{fileId}
+    B->>C: Return deletion status
+    C->>U: Display deletion status
+
+    Note over U,C: View All Files
+    U->>C: Requests to see all files
+    C->>B: GET /api/v1/file-storage-service/file
+    B->>C: Sends list of files
+    C->>U: Display files list
+
 
 ## Backend Application: spring-boot-file-storage-service
 
