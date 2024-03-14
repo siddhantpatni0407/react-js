@@ -2,6 +2,18 @@
 
 File Storage System is a web application built with ReactJS for managing files. It allows users to upload, view, and delete files conveniently.
 
+## Table of Contents
+
+- [Features](#features)
+- [Backend Application: spring-boot-file-storage-service](#backend-application-spring-boot-file-storage-service)
+- [Frontend Application: file-storage-ui](#frontend-application-file-storage-ui)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+- [Author](#author)
+
 ## Features
 
 - **Upload File:** Users can upload files to the system.
