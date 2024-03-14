@@ -12,16 +12,16 @@ File Storage System is a web application built with ReactJS for managing files. 
 
 The backend application, named `spring-boot-file-storage-service`, provides the following endpoints:
 
-Clone the repository:
-
-    ```bash
-    git clone https://github.com/siddhantpatni0407/spring-boot-microservices.git
-    ```
-
 - **Upload File Endpoint:** POST `/api/v1/file-storage-service/file/upload`
 - **Download File Endpoint:** GET `/api/v1/file-storage-service/file/download?id={fileId}`
 - **Delete File Endpoint:** DELETE `/api/v1/file-storage-service/file/delete/{fileId}`
 - **Get All Files Endpoint:** GET `/api/v1/file-storage-service/file`
+
+Backend Code Repository URL: [spring-boot-microservices](https://github.com/siddhantpatni0407/spring-boot-microservices.git)
+
+## Frontend Application: file-storage-ui
+
+The frontend application, named `file-storage-ui`, is built using ReactJS.
 
 ## Installation
 
@@ -30,7 +30,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/siddhantpatni0407/react-js.git
+    git clone https://github.com/your-username/file-storage-system.git
     ```
 
 2. Navigate to the project directory:
