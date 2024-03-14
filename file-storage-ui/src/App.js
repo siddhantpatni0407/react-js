@@ -4,6 +4,7 @@ import Navbar from "./layout/Navbar";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./about/about";
+import Contact from "./contact/contact"; // Import Contact component
 import Footer from "./footer/footer";
 import AddFile from "./files/AddFile";
 import GetFileData from "./files/GetFileData";
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/getFileData/:id" element={<GetFileData />} />
           <Route exact path="/getAllFiles/:id" element={<GetAllFiles />} />
           <Route exact path="/about" element={<About />} />
+          <Route exact path="/contact" element={<Contact />} /> {/* Add Contact route */}
         </Routes>
       </Router>
       <Footer />
