@@ -61,13 +61,33 @@ To run this project locally, follow these steps:
     npm install
     ```
 
-4. Start the development server:
+4. Install axios for making HTTP requests:
+
+    ```bash
+    npm install axios
+    ```
+
+5. Install Bootstrap for styling:
+
+    ```bash
+    npm install bootstrap@5.3.3
+    ```
+
+6. Install Font Awesome for icons:
+
+    ```bash
+    npm install @fortawesome/fontawesome-free@6.5.1
+    npm install @fortawesome/free-solid-svg-icons@6.5.1
+    npm install @fortawesome/react-fontawesome@0.2.0
+    ```
+
+7. Start the development server:
 
     ```bash
     npm start
     ```
 
-5. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to view the app.
+8. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to view the app.
 
 ## Usage
 
