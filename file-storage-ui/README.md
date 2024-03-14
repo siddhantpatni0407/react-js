@@ -5,6 +5,7 @@ File Storage System is a web application built with ReactJS for managing files. 
 ## Table of Contents
 
 - [Features](#features)
+- [Application Flow](#application-flow)
 - [Flowchart Diagram](#flowchart-diagram)
 - [Sequence Diagram](#sequence-diagram)
 - [Backend Application: spring-boot-file-storage-service](#backend-application-spring-boot-file-storage-service)
@@ -21,6 +22,29 @@ File Storage System is a web application built with ReactJS for managing files. 
 - **Upload File:** Users can upload files to the system.
 - **View File:** Users can view files stored in the system.
 - **Delete File:** Users can delete files from the system.
+
+## Application Flow
+
+```mermaid
+graph TD
+    subgraph ReactJS Frontend Application
+    A[File Storage System Interface] -->|Upload File| B(Upload File Component)
+    A -->|View File| C(View File Component)
+    A -->|Delete File| D(Delete File Component)
+    end
+
+    subgraph Spring Boot Backend Application
+    E[spring-boot-file-storage-service] -->|POST /api/v1/file-storage-service/file/upload| F(Upload File Endpoint)
+    E -->|GET /api/v1/file-storage-service/file/download| G(Download File Endpoint)
+    E -->|DELETE /api/v1/file-storage-service/file/delete| H(Delete File Endpoint)
+    E -->|GET /api/v1/file-storage-service/file| I(Get All Files Endpoint)
+    end
+
+    B -->|Request to Upload| F
+    C -->|Request to Download| G
+    D -->|Request to Delete| H
+    C -->|Request to Get All Files| I
+```
 
 ## Flowchart Diagram
 
