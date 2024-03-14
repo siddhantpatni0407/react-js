@@ -17,7 +17,11 @@ The backend application, named `spring-boot-file-storage-service`, provides the 
 - **Delete File Endpoint:** DELETE `/api/v1/file-storage-service/file/delete/{fileId}`
 - **Get All Files Endpoint:** GET `/api/v1/file-storage-service/file`
 
-Backend Code Repository URL: [spring-boot-microservices](https://github.com/siddhantpatni0407/spring-boot-microservices.git)
+Backend Code Repository URL:
+
+```bash
+git clone https://github.com/siddhantpatni0407/spring-boot-microservices.git
+```
 
 ## Frontend Application: file-storage-ui
 
@@ -30,7 +34,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/file-storage-system.git
+    git clone https://github.com/siddhantpatni0407/react-js.git
     ```
 
 2. Navigate to the project directory:
