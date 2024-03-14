@@ -14,9 +14,9 @@ The backend application, named `spring-boot-file-storage-service`, provides the 
 
     Clone the repository:
 
-        ```bash
-        git clone https://github.com/siddhantpatni0407/spring-boot-microservices.git
-        ```
+    ```bash
+    git clone https://github.com/siddhantpatni0407/spring-boot-microservices.git
+    ```
 
 - **Upload File Endpoint:** POST `/api/v1/file-storage-service/file/upload`
 - **Download File Endpoint:** GET `/api/v1/file-storage-service/file/download?id={fileId}`
