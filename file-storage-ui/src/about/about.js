@@ -12,8 +12,9 @@ export default function About() {
                         <div className="card-body">
                             <p className="lead">Welcome to our File Storage System application!</p>
                             <p>
-                                This is Front end application built in ReactJS for File Storage System and integrated with Sprint boot backend application.
+                                This is Frontend application built in ReactJS for File Storage System and integrated with Sprint boot backend application.
                             </p>
+                            <p>Developed by Siddhant Patni</p> {/* Added Developed by Siddhant Patni */}
                         </div>
                     </div>
                 </div>
