@@ -23,16 +23,15 @@ export default function Home() {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/v1/file-storage-service/file/delete/${deleteId}`);
+      await axios.delete(`http://localhost:8080/api/v1/file-storage-service/file/delete/${id}`);
       alert('File deleted successfully!');
       fetchAllFiles(); // Refresh the file list after deletion
     } catch (error) {
       console.error('Error deleting file:', error);
       alert('Failed to delete file!');
     }
-    setDeleteId(null); // Reset deleteId after deletion
   };
 
   const handleDeleteConfirmation = (id) => {
@@ -46,6 +45,24 @@ export default function Home() {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleUpload = async (event) => {
+    try {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      await axios.post('http://localhost:8080/api/v1/file-storage-service/file/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      alert('File uploaded successfully!');
+      fetchAllFiles(); // Refresh the file list after upload
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Failed to upload file!');
+    }
+  };
 
   return (
     <div className="container">
@@ -121,12 +138,17 @@ export default function Home() {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={() => setDeleteId(null)}>Cancel</button>
-                <button type="button" className="btn btn-danger" onClick={handleDelete}>Delete</button>
+                <button type="button" className="btn btn-danger" onClick={() => handleDelete(deleteId)}>Delete</button>
               </div>
             </div>
           </div>
         </div>
       )}
+
+      <div className="text-center mt-3">
+        <label htmlFor="fileUpload" className="btn btn-primary">Upload File</label>
+        <input type="file" id="fileUpload" style={{ display: 'none' }} onChange={handleUpload} />
+      </div>
     </div>
   );
 }
