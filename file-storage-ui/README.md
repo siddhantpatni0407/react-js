@@ -12,7 +12,7 @@ File Storage System is a web application built with ReactJS for managing files. 
 
 The backend application, named `spring-boot-file-storage-service`, provides the following endpoints:
 
-    Clone the repository:
+Clone the repository:
 
     ```bash
     git clone https://github.com/siddhantpatni0407/spring-boot-microservices.git
