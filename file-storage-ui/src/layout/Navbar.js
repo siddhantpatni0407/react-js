@@ -57,7 +57,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="d-flex align-items-center">
-            <p className={`me-2 ${isDarkMode ? 'text-light' : 'text-dark'}`}>{currentTime}</p> {/* Display current time */}
+            <p className={`me-2 ${isDarkMode ? 'text-light' : 'text-dark'}`} style={{ color: '#ff5733', fontWeight: 'bold' }}>{currentTime}</p> {/* Display current time */}
             <button className="btn btn-outline-primary me-2" onClick={handleRefresh}>
               <FontAwesomeIcon icon={faSyncAlt} /> {/* Refresh icon */}
             </button>
