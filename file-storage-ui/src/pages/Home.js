@@ -7,6 +7,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10); // Number of items per page
   const [deleteId, setDeleteId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // New state for controlling modal visibility
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -31,11 +32,14 @@ export default function Home() {
     } catch (error) {
       console.error('Error deleting file:', error);
       alert('Failed to delete file!');
+    } finally {
+      setShowDeleteModal(false); // Hide the delete modal after deletion
     }
   };
 
   const handleDeleteConfirmation = (id) => {
     setDeleteId(id);
+    setShowDeleteModal(true); // Show the delete modal when confirmation is clicked
   };
 
   // Calculate index of the first and last item on the current page
@@ -123,13 +127,13 @@ export default function Home() {
         </div>
       )}
 
-      {deleteId && (
+      {showDeleteModal && (
         <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Confirm Delete ? </h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setDeleteId(null)}>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setShowDeleteModal(false)}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -137,7 +141,7 @@ export default function Home() {
                 Are you sure you want to delete this file?
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setDeleteId(null)}>Cancel</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>Cancel</button>
                 <button type="button" className="btn btn-danger" onClick={() => handleDelete(deleteId)}>Delete</button>
               </div>
             </div>
