@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function TopicManagement() {
@@ -10,6 +10,10 @@ function TopicManagement() {
   const [createNotification, setCreateNotification] = useState("");
   const [deleteNotification, setDeleteNotification] = useState("");
   const [showTopics, setShowTopics] = useState(false); // State to track if topics should be shown
+
+  useEffect(() => {
+    getAllTopics();
+  }, []);
 
   const createTopic = () => {
     let url = `http://localhost:8081/api/v1/kafka-service/kafka/topic?topicName=${newTopicName}`;
@@ -36,6 +40,7 @@ function TopicManagement() {
       .then((response) => {
         console.log("All topics:", response.data);
         setTopics(response.data);
+        setTopicToDelete(""); // Reset topicToDelete state
         setShowTopics(true); // Set showTopics to true after fetching topics
       })
       .catch((error) => {
@@ -114,16 +119,28 @@ function TopicManagement() {
         Get All Topics
       </button>
 
-      {showTopics && ( // Render topics only if showTopics is true
+      {showTopics && (
         <div>
-          {loading && <p>Loading...</p>}
-          <ul className="list-group mt-3">
-            {topics.map((topic, index) => (
-              <li key={index} className="list-group-item">
-                {topic}
-              </li>
-            ))}
-          </ul>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <table className="table mt-3">
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col">Sr No.</th>
+                  <th scope="col">Topic Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {topics.map((topic, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{topic}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       )}
     </div>
