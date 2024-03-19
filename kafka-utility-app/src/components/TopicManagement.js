@@ -5,8 +5,11 @@ function TopicManagement() {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newTopicName, setNewTopicName] = useState("");
-  const [partition, setPartition] = useState(""); // State for partition input
-  const [topicToDelete, setTopicToDelete] = useState(""); // State for topic deletion input
+  const [partition, setPartition] = useState("");
+  const [topicToDelete, setTopicToDelete] = useState("");
+  const [createNotification, setCreateNotification] = useState("");
+  const [deleteNotification, setDeleteNotification] = useState("");
+  const [showTopics, setShowTopics] = useState(false); // State to track if topics should be shown
 
   const createTopic = () => {
     let url = `http://localhost:8081/api/v1/kafka-service/kafka/topic?topicName=${newTopicName}`;
@@ -17,11 +20,12 @@ function TopicManagement() {
       .post(url)
       .then((response) => {
         console.log("Topic created successfully");
-        // Handle success if needed
+        setCreateNotification("Topic created successfully");
+        getAllTopics(); // Fetch topics after creating a new topic
       })
       .catch((error) => {
         console.error("Error creating topic:", error);
-        // Handle error if needed
+        setCreateNotification("Failed to create topic");
       });
   };
 
@@ -32,6 +36,7 @@ function TopicManagement() {
       .then((response) => {
         console.log("All topics:", response.data);
         setTopics(response.data);
+        setShowTopics(true); // Set showTopics to true after fetching topics
       })
       .catch((error) => {
         console.error("Error getting all topics:", error);
@@ -48,11 +53,12 @@ function TopicManagement() {
       )
       .then((response) => {
         console.log("Topic deleted successfully");
-        // Handle success if needed
+        setDeleteNotification("Topic deleted successfully");
+        getAllTopics(); // Fetch topics after deleting a topic
       })
       .catch((error) => {
         console.error("Error deleting topic:", error);
-        // Handle error if needed
+        setDeleteNotification("Failed to delete topic");
       });
   };
 
@@ -78,34 +84,48 @@ function TopicManagement() {
         <button onClick={createTopic} className="btn btn-primary">
           Create Topic
         </button>
+        {createNotification && (
+          <p className="text-success">{createNotification}</p>
+        )}
       </div>
 
       <div className="mb-3">
-        <input
-          type="text"
+        <select
+          className="form-control mr-2"
           value={topicToDelete}
           onChange={(e) => setTopicToDelete(e.target.value)}
-          className="form-control mr-2"
-          placeholder="Enter topic name to delete"
-        />
+        >
+          <option value="">Select topic to delete</option>
+          {topics.map((topic, index) => (
+            <option key={index} value={topic}>
+              {topic}
+            </option>
+          ))}
+        </select>
         <button onClick={deleteTopic} className="btn btn-danger">
           Delete Topic
         </button>
+        {deleteNotification && (
+          <p className="text-success">{deleteNotification}</p>
+        )}
       </div>
 
       <button onClick={getAllTopics} className="btn btn-primary">
         Get All Topics
       </button>
 
-      {loading && <p>Loading...</p>}
-
-      <ul className="list-group mt-3">
-        {topics.map((topic, index) => (
-          <li key={index} className="list-group-item">
-            {topic}
-          </li>
-        ))}
-      </ul>
+      {showTopics && ( // Render topics only if showTopics is true
+        <div>
+          {loading && <p>Loading...</p>}
+          <ul className="list-group mt-3">
+            {topics.map((topic, index) => (
+              <li key={index} className="list-group-item">
+                {topic}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
